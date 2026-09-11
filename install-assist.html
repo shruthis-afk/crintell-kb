@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title><style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#f4f5f7;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+    .kb-article{max-width:840px;margin:0 auto;background:#ffffff;color:#1f2328;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);
+      --kb-bg:#ffffff; --kb-text:#1f2328; --kb-accent:#6c8cff; --kb-accent-contrast:#ffffff;
+      --kb-border: color-mix(in srgb, #1f2328 12%, #ffffff); --kb-muted: color-mix(in srgb, #1f2328 55%, #ffffff);
+      --kb-toc-bg: color-mix(in srgb, #6c8cff 7%, #ffffff); --kb-radius: 16px;
+      --kb-pad-x: 44px; --kb-step-pad: 26px;
+    }
+    .kb-header{padding:26px 44px 0;display:flex;align-items:center;gap:12px;} .kb-header img{height:30px;display:block;} .kb-header .kb-org{font-weight:700;font-size:14px;color:var(--kb-muted);}
+    .kb-body{padding:26px var(--kb-pad-x) 56px;}
+    .kb-video{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;margin-bottom:28px;background:#000;} .kb-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;} .kb-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .kb-video.kb-video-file{position:static;padding-top:0;height:auto;background:transparent;} .kb-video.kb-video-file video{width:100%;display:block;border-radius:12px;}
+    .kb-intro{font-size:15.5px;line-height:1.75;margin-bottom:8px;} .kb-intro ul{padding-left:20px;} .kb-intro a{color:var(--kb-accent);}
+    .kb-toc{margin:26px 0 34px;padding:16px 20px;border-radius:calc(var(--kb-radius) * .5);background:var(--kb-toc-bg);border:1px solid var(--kb-border);}
+    .kb-toc-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--kb-muted);margin-bottom:10px;}
+    .kb-toc ol{margin:0;padding-left:18px;} .kb-toc li{margin-bottom:5px;font-size:14px;} .kb-toc a{color:var(--kb-accent);text-decoration:none;font-weight:600;} .kb-toc a:hover{text-decoration:underline;}
+    .kb-blocks{list-style:none;margin:0;padding:0;}
+    .kb-step{display:flex;gap:18px;padding:var(--kb-step-pad) 0;border-top:1px solid var(--kb-border);scroll-margin-top:24px;} .kb-step:first-child{border-top:none;padding-top:0;}
+    .kb-step-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--kb-accent);color:var(--kb-accent-contrast);font-weight:800;font-size:14.5px;display:flex;align-items:center;justify-content:center;}
+    .kb-step-body{flex:1;min-width:0;} .kb-step-title{font-size:17px;font-weight:700;margin:2px 0 8px;}
+    .kb-step-desc{font-size:14.5px;line-height:1.7;} .kb-step-desc ul{padding-left:20px;margin:8px 0;} .kb-step-desc a{color:var(--kb-accent);}
+    .kb-step-images{display:flex;flex-direction:column;gap:14px;margin-top:14px;} .kb-step-img-block img{max-width:100%;border-radius:calc(var(--kb-radius) * .45);border:1px solid var(--kb-border);display:block;}
+    .kb-step-img-caption{font-size:12.5px;color:var(--kb-muted);margin-top:6px;}
+    .kb-callout{margin:22px 0;padding:16px 18px;border-radius:calc(var(--kb-radius) * .4);border-left:4px solid var(--callout-color);background:var(--callout-bg);font-size:14.5px;line-height:1.65;list-style:none;}
+    .kb-callout-label{font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;color:var(--callout-color);}
+    .kb-code{list-style:none;margin:22px 0;background:#171923;color:#e8eaf0;border-radius:calc(var(--kb-radius) * .4);padding:16px 18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.6;overflow-x:auto;white-space:pre;}
+    .kb-divider{list-style:none;border:none;border-top:1px solid var(--kb-border);margin:34px 0;}
+    .kb-accordion{list-style:none;margin:22px 0;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .4);overflow:hidden;}
+    .kb-accordion-item{border-top:1px solid var(--kb-border);} .kb-accordion-item:first-child{border-top:none;}
+    .kb-accordion-item summary{cursor:pointer;padding:14px 18px;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+    .kb-accordion-item summary::-webkit-details-marker{display:none;} .kb-accordion-item summary:after{content:'+';color:var(--kb-muted);font-weight:400;font-size:18px;}
+    .kb-accordion-item[open] summary:after{content:'–';} .kb-accordion-item .kb-accordion-a{padding:0 18px 16px;font-size:14px;line-height:1.65;white-space:pre-wrap;}
+    .kb-tabs{list-style:none;margin:22px 0;} .kb-tabs-nav{display:flex;gap:4px;border-bottom:1px solid var(--kb-border);margin-bottom:16px;flex-wrap:wrap;}
+    .kb-tab-btn{background:none;border:none;padding:9px 14px;font-size:13.5px;font-weight:600;color:var(--kb-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;}
+    .kb-tab-btn.active{color:var(--kb-accent);border-bottom-color:var(--kb-accent);} .kb-tab-panel{font-size:14.5px;line-height:1.7;white-space:pre-wrap;}
+    .kb-compare{list-style:none;margin:22px 0;} .kb-compare-frame{position:relative;overflow:hidden;border-radius:calc(var(--kb-radius) * .4);border:1px solid var(--kb-border);}
+    .kb-compare-frame img{display:block;width:100%;} .kb-compare-after{width:100%;}
+    .kb-compare-before-wrap{position:absolute;top:0;left:0;height:100%;overflow:hidden;width:50%;border-right:2px solid #fff;}
+    .kb-compare-before-wrap img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none;}
+    .kb-compare-slider{position:absolute;bottom:10px;left:5%;width:90%;margin:0;} .kb-compare-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--kb-muted);margin-top:8px;}
+    .kb-file{list-style:none;margin:22px 0;display:flex;align-items:center;gap:14px;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .4);padding:14px 18px;}
+    .kb-file-icon{width:36px;height:36px;border-radius:8px;background:var(--kb-accent);color:var(--kb-accent-contrast);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .kb-file-meta{flex:1;min-width:0;} .kb-file-name{font-weight:700;font-size:14px;} .kb-file-desc{font-size:12.5px;color:var(--kb-muted);margin-top:2px;}
+    .kb-file-btn{background:var(--kb-accent);color:var(--kb-accent-contrast);text-decoration:none;font-weight:600;font-size:13px;padding:8px 16px;border-radius:20px;flex-shrink:0;}
+    </style></head><body>
+<div class="kb-article"><div class="kb-body">
+      <div class="kb-intro">Supercharge your sourcing workflow by integrating CrintellTech Recruitment Assist directly into your browser. Follow this guide to get set up in under two minutes.</div>
+      <ol class="kb-blocks"><li class="kb-callout" style="--callout-color:#5b6472;--callout-bg:rgba(91,100,114,.08);"><div class="kb-callout-label">Note</div><div>Before you begin, ensure you have the following:<div><ul><li>Browser: Google Chrome or Edge (Latest version recommended).</li></ul></div></div></li><li class="kb-step" id="fbx6x5j"><div class="kb-step-num">1</div><div class="kb-step-body">
+          <div class="kb-step-title">Visit CrintellTech website</div>
+          <div class="kb-step-desc"><ul><li>Navigate to the <a href="https://app.crintelltech.com/login">CrintellTech App</a></li><li>Click on Login</li></ul></div>
+          
+        </div></li><li class="kb-step" id="k7mkvcm"><div class="kb-step-num">2</div><div class="kb-step-body">
+          <div class="kb-step-title">Enter your login credentials</div>
+          <div class="kb-step-desc"><ul><li><b>Username:</b> Your official email ID</li><li><b>Password: </b>A default password was emailed to you or your IT admin</li></ul></div>
+          
+        </div></li><li class="kb-callout" style="--callout-color:#1f9d63;--callout-bg:rgba(31,157,99,.08);"><div class="kb-callout-label">Follow the on screen instructions to install the Chrome extension</div><div>Make sure you’re downloading the Recruitment Assist and following all the steps without skipping any.</div></li><li class="kb-step" id="uhe3eas"><div class="kb-step-num">3</div><div class="kb-step-body">
+          <div class="kb-step-title">Pin Recruitment Assist for quick and easy access</div>
+          <div class="kb-step-desc"><ul><li>Once you’ve installed the extension, click the Puzzle Icon (Extensions) in the top right of Chrome.&nbsp;</li><li>Find CrintellTech Recruitment Assist.&nbsp;</li><li>Click the Pin icon so it turns blue.</li></ul></div>
+          
+        </div></li><li class="kb-step" id="df0dbeg"><div class="kb-step-num">4</div><div class="kb-step-body">
+          <div class="kb-step-title">Grant Necessary Permissions</div>
+          <div class="kb-step-desc"><div><ul><li>Make sure the extension has all required permissions.</li><li>Navigate to a job board.</li><li>Click on "Continue" and "Allow" in the Google Chrome pop-up which appears.</li></ul></div></div>
+          
+        </div></li><li class="kb-callout" style="--callout-color:#5b6472;--callout-bg:rgba(91,100,114,.08);"><div class="kb-callout-label">Need More Help?</div><div><div>If you run into issues while installing the browser extension please contact <a href="mailto:support@crintelltech.com">support@crintelltech.com</a> with a brief description and screenshot of the problem. You also check the troubleshooting link below for more information.</div></div></li></ol></div></div>
+<script>
+    document.querySelectorAll('[data-tabs]').forEach(function(container){
+      container.querySelectorAll('.kb-tab-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          container.querySelectorAll('.kb-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+          container.querySelectorAll('.kb-tab-panel').forEach(function(p){ p.style.display = 'none'; });
+          btn.classList.add('active');
+          var panel = container.querySelector('#' + CSS.escape(btn.dataset.tabTarget));
+          if(panel) panel.style.display = '';
+        });
+      });
+    });
+    document.querySelectorAll('[data-compare]').forEach(function(frame){
+      var before = frame.querySelector('.kb-compare-before');
+      var wrap = frame.querySelector('.kb-compare-before-wrap');
+      var slider = frame.querySelector('.kb-compare-slider');
+      if(!before || !wrap || !slider) return;
+      function update(){ var w = frame.offsetWidth; before.style.width = w + 'px'; wrap.style.width = slider.value + '%'; }
+      slider.addEventListener('input', update);
+      window.addEventListener('resize', update);
+      if(before.complete) update(); else before.addEventListener('load', update);
+    });
+    </script>
+</body></html>
