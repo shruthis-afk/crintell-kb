@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Update Recruitment Assist and Browser</title><style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#f4f5f7;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+    .kb-article{max-width:840px;margin:0 auto;background:#ffffff;color:#1f2328;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);
+      --kb-bg:#ffffff; --kb-text:#1f2328; --kb-accent:#6c8cff; --kb-accent-contrast:#ffffff;
+      --kb-border: color-mix(in srgb, #1f2328 12%, #ffffff); --kb-muted: color-mix(in srgb, #1f2328 55%, #ffffff);
+      --kb-toc-bg: color-mix(in srgb, #6c8cff 7%, #ffffff); --kb-radius: 16px; --kb-heading-scale: 1;
+      --kb-pad-x: 44px; --kb-step-pad: 26px;
+    }
+    .kb-header{padding:26px 44px 0;display:flex;align-items:center;gap:12px;} .kb-header img{height:30px;display:block;} .kb-header .kb-org{font-weight:700;font-size:14px;color:var(--kb-muted);}
+    .kb-body{padding:26px var(--kb-pad-x) 56px;}
+    .kb-video{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;margin-bottom:28px;background:#000;} .kb-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;} .kb-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .kb-video.kb-video-file{position:static;padding-top:0;height:auto;background:transparent;} .kb-video.kb-video-file video{width:100%;display:block;border-radius:12px;}
+    .kb-hero{padding:40px 44px 34px;background:linear-gradient(135deg, color-mix(in srgb, #6c8cff 55%, #0b1220), #05070d);color:#fff;}
+    .kb-hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
+    .kb-hero-title{font-size:calc(30px * var(--kb-heading-scale,1));font-weight:800;line-height:1.25;margin-bottom:14px;letter-spacing:-.01em;}
+    .kb-hero-subtitle{font-size:15px;line-height:1.7;color:rgba(255,255,255,.78);max-width:640px;} .kb-hero-subtitle a{color:#fff;} .kb-hero-subtitle ul{padding-left:20px;}
+    .kb-hero-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;}
+    .kb-hero-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:9px 14px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.92);}
+    .kb-callout-icon{margin-right:7px;}
+    .kb-browser-frame{width:100%;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .4);overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.14);}
+    .kb-browser-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#e9ebef;}
+    .kb-browser-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0;}
+    .kb-browser-url{flex:1;margin-left:8px;background:#fff;border-radius:6px;padding:4px 12px;font-size:11px;color:#5b6472;font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .kb-browser-body img,.kb-browser-body video{border:0;border-radius:0;margin:0;}
+    .kb-intro{font-size:15.5px;line-height:1.75;margin-bottom:8px;} .kb-intro ul{padding-left:20px;} .kb-intro a{color:var(--kb-accent);}
+    .kb-toc{margin:26px 0 34px;padding:16px 20px;border-radius:calc(var(--kb-radius) * .5);background:var(--kb-toc-bg);border:1px solid var(--kb-border);}
+    .kb-toc-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--kb-muted);margin-bottom:10px;}
+    .kb-toc ol{margin:0;padding-left:18px;} .kb-toc li{margin-bottom:5px;font-size:14px;} .kb-toc a{color:var(--kb-accent);text-decoration:none;font-weight:600;} .kb-toc a:hover{text-decoration:underline;}
+    .kb-blocks{list-style:none;margin:0;padding:0;}
+    .kb-step{display:flex;gap:18px;padding:var(--kb-step-pad) 0;border-top:1px solid var(--kb-border);scroll-margin-top:24px;} .kb-step:first-child{border-top:none;padding-top:0;}
+    .kb-step-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--kb-accent);color:var(--kb-accent-contrast);font-weight:800;font-size:14.5px;display:flex;align-items:center;justify-content:center;}
+    .kb-step-body{flex:1;min-width:0;} .kb-step-title{font-size:calc(17px * var(--kb-heading-scale,1));font-weight:700;margin:2px 0 8px;}
+    .kb-step-desc{font-size:14.5px;line-height:1.7;} .kb-step-desc ul{padding-left:20px;margin:8px 0;} .kb-step-desc a{color:var(--kb-accent);}
+    .kb-step-images{display:flex;flex-direction:column;gap:14px;margin-top:14px;} .kb-step-img-block{display:flex;flex-direction:column;align-items:center;} .kb-step-img-block img,.kb-step-img-block video{width:100%;max-width:100%;height:auto;object-fit:cover;border-radius:calc(var(--kb-radius) * .45);border:1px solid var(--kb-border);display:block;background:#000;}
+    .kb-step-split{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;} .kb-step-text-col{flex:1 1 280px;min-width:0;} .kb-step-media-col{flex:1 1 280px;max-width:420px;margin:0 auto;} .kb-step-media-col .kb-step-images{margin-top:0;}
+    .kb-step-img-caption{font-size:12.5px;color:var(--kb-muted);margin-top:6px;}
+    .kb-callout{margin:22px 0;padding:16px 18px;border-radius:calc(var(--kb-radius) * .4);border-left:4px solid var(--callout-color);background:var(--callout-bg);font-size:14.5px;line-height:1.65;list-style:none;}
+    .kb-callout-label{font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;color:var(--callout-color);}
+    .kb-code{list-style:none;margin:0;background:#171923;color:#e8eaf0;border-radius:calc(var(--kb-radius) * .4);padding:16px 18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.6;overflow-x:auto;white-space:pre;}
+    .kb-divider{list-style:none;border:none;border-top:1px solid var(--kb-border);margin:34px 0;}
+    .kb-accordion{list-style:none;margin:22px 0;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .4);overflow:hidden;}
+    .kb-accordion-item{border-top:1px solid var(--kb-border);} .kb-accordion-item:first-child{border-top:none;}
+    .kb-accordion-item summary{cursor:pointer;padding:14px 18px;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+    .kb-accordion-item summary::-webkit-details-marker{display:none;} .kb-accordion-item summary:after{content:'+';color:var(--kb-muted);font-weight:400;font-size:18px;}
+    .kb-accordion-item[open] summary:after{content:'–';} .kb-accordion-item .kb-accordion-a{padding:0 18px 16px;font-size:14px;line-height:1.65;white-space:pre-wrap;}
+    .kb-tabs{list-style:none;margin:22px 0;} .kb-tabs-nav{display:flex;gap:4px;border-bottom:1px solid var(--kb-border);margin-bottom:16px;flex-wrap:wrap;}
+    .kb-tab-btn{background:none;border:none;padding:9px 14px;font-size:13.5px;font-weight:600;color:var(--kb-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;}
+    .kb-tab-btn.active{color:var(--kb-accent);border-bottom-color:var(--kb-accent);} .kb-tab-panel{font-size:14.5px;line-height:1.7;white-space:pre-wrap;}
+    .kb-tab-steps{white-space:normal;} .kb-tab-steps .kb-step{padding:14px 0;} .kb-tab-steps .kb-step-num{width:26px;height:26px;font-size:12.5px;} .kb-tab-steps .kb-step-title{font-size:14.5px;}
+    .kb-compare{list-style:none;margin:22px 0;} .kb-compare-frame{position:relative;overflow:hidden;border-radius:calc(var(--kb-radius) * .4);border:1px solid var(--kb-border);}
+    .kb-compare-frame img{display:block;width:100%;} .kb-compare-after{width:100%;}
+    .kb-compare-before-wrap{position:absolute;top:0;left:0;height:100%;overflow:hidden;width:50%;border-right:2px solid #fff;}
+    .kb-compare-before-wrap img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none;}
+    .kb-compare-slider{position:absolute;bottom:10px;left:5%;width:90%;margin:0;} .kb-compare-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--kb-muted);margin-top:8px;}
+    .kb-file{list-style:none;margin:22px 0;display:flex;align-items:center;gap:14px;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .4);padding:14px 18px;}
+    .kb-file-icon{width:36px;height:36px;border-radius:8px;background:var(--kb-accent);color:var(--kb-accent-contrast);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .kb-file-meta{flex:1;min-width:0;} .kb-file-name{font-weight:700;font-size:14px;} .kb-file-desc{font-size:12.5px;color:var(--kb-muted);margin-top:2px;}
+    .kb-file-btn{background:var(--kb-accent);color:var(--kb-accent-contrast);text-decoration:none;font-weight:600;font-size:13px;padding:8px 16px;border-radius:20px;flex-shrink:0;}
+    .kb-feature-grid{list-style:none;margin:22px 0;display:flex;flex-wrap:wrap;gap:16px;}
+    .kb-feature-card{flex:1 1 240px;border:1px solid var(--kb-border);border-top:3px solid var(--fcolor,var(--kb-accent));border-radius:calc(var(--kb-radius) * .4);padding:20px;}
+    .kb-feature-icon{width:44px;height:44px;border-radius:10px;background:color-mix(in srgb, var(--fcolor,var(--kb-accent)) 15%, var(--kb-bg));display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;}
+    .kb-feature-title{font-weight:700;font-size:calc(15.5px * var(--kb-heading-scale,1));margin-bottom:8px;} .kb-feature-desc{font-size:13.5px;line-height:1.65;color:var(--kb-muted);}
+    .kb-badge-grid{list-style:none;margin:22px 0;display:flex;flex-wrap:wrap;gap:12px;}
+    .kb-badge-card{flex:1 1 130px;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .35);padding:16px 12px;text-align:center;}
+    .kb-badge-label{font-weight:800;font-size:14px;} .kb-badge-sub{font-size:11px;color:var(--kb-muted);text-transform:uppercase;letter-spacing:.05em;margin-top:5px;} .kb-badge-check{color:#1f9d63;margin-top:9px;font-weight:700;}
+    .kb-cta{list-style:none;margin:28px 0;}
+    .kb-cta-inner{background:linear-gradient(135deg, color-mix(in srgb, #6c8cff 55%, #0b1220), #05070d);border-radius:calc(var(--kb-radius) * .55);padding:26px 30px;color:#fff;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+    .kb-cta-icon{width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+    .kb-cta-text{flex:1;min-width:200px;} .kb-cta-title{font-weight:800;font-size:calc(17px * var(--kb-heading-scale,1));margin-bottom:6px;} .kb-cta-desc{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.78);}
+    .kb-cta-btn{background:#fff;color:#0b1220;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:999px;text-decoration:none;flex-shrink:0;white-space:nowrap;}
+    .kb-table-wrap{list-style:none;margin:22px 0;overflow-x:auto;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .35);}
+    .kb-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+    .kb-table th,.kb-table td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--kb-border);}
+    .kb-table thead th{background:color-mix(in srgb, var(--kb-accent) 6%, var(--kb-bg));font-weight:700;color:var(--kb-text);}
+    .kb-table tbody tr:last-child td{border-bottom:0;}
+    .kb-rating{list-style:none;margin:22px 0;} .kb-rating-title{font-weight:700;font-size:14.5px;margin-bottom:8px;}
+    .kb-rating-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;} .kb-stars{display:inline-flex;gap:2px;}
+    .kb-star{position:relative;font-size:18px;line-height:1;color:var(--kb-border);}
+    .kb-star::before{content:'★';position:absolute;top:0;left:0;width:var(--fill);overflow:hidden;color:#f0b429;white-space:nowrap;}
+    .kb-rating-score{font-size:13px;color:var(--kb-muted);font-weight:600;} .kb-rating-desc{font-size:13px;color:var(--kb-muted);margin-top:6px;}
+    .kb-links-block{list-style:none;margin:22px 0;} .kb-links-title{font-weight:700;font-size:14.5px;margin-bottom:10px;}
+    .kb-links-list{display:flex;flex-direction:column;gap:8px;}
+    .kb-links-item{display:block;border:1px solid var(--kb-border);border-radius:calc(var(--kb-radius) * .35);padding:12px 14px;text-decoration:none;color:inherit;}
+    .kb-links-item:hover{border-color:var(--kb-accent);}
+    .kb-links-item-title{font-weight:600;font-size:13.5px;color:var(--kb-accent);} .kb-links-item-desc{font-size:12.5px;color:var(--kb-muted);margin-top:3px;}
+    .kb-breadcrumb{list-style:none;margin:0 0 18px;font-size:12.5px;color:var(--kb-muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
+    .kb-breadcrumb a{color:var(--kb-muted);text-decoration:none;} .kb-breadcrumb a:hover{color:var(--kb-accent);}
+    .kb-breadcrumb span:last-child{color:var(--kb-text);font-weight:600;} .kb-crumb-sep{margin:0 2px;opacity:.6;}
+    .kb-article.kb-style-flat .kb-feature-card,.kb-article.kb-style-flat .kb-badge-card,.kb-article.kb-style-flat .kb-browser-frame,.kb-article.kb-style-flat .kb-compare-frame,.kb-article.kb-style-flat .kb-toc,.kb-article.kb-style-flat .kb-accordion,.kb-article.kb-style-flat .kb-table-wrap,.kb-article.kb-style-flat .kb-links-item{border:0;box-shadow:none;background:color-mix(in srgb, var(--kb-accent) 4%, var(--kb-bg));}
+    .kb-article.kb-style-shadow .kb-feature-card,.kb-article.kb-style-shadow .kb-badge-card,.kb-article.kb-style-shadow .kb-browser-frame,.kb-article.kb-style-shadow .kb-compare-frame,.kb-article.kb-style-shadow .kb-toc,.kb-article.kb-style-shadow .kb-accordion,.kb-article.kb-style-shadow .kb-table-wrap,.kb-article.kb-style-shadow .kb-links-item{border:0;box-shadow:0 10px 28px rgba(0,0,0,.08);}
+    .kb-article.kb-btn-rounded .kb-cta-btn,.kb-article.kb-btn-rounded .kb-file-btn{border-radius:10px;}
+    .kb-article.kb-btn-square .kb-cta-btn,.kb-article.kb-btn-square .kb-file-btn{border-radius:4px;}
+    .kb-tooltip{border-bottom:1px dashed var(--kb-accent);cursor:help;position:relative;}
+    .kb-tooltip:hover::after{content:attr(data-tip);position:absolute;bottom:125%;left:50%;transform:translateX(-50%);background:#171923;color:#fff;padding:7px 10px;border-radius:6px;font-size:12px;line-height:1.4;white-space:normal;width:max-content;max-width:220px;z-index:30;box-shadow:0 8px 22px rgba(0,0,0,.28);}
+    .kb-tooltip:hover::before{content:'';position:absolute;bottom:112%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#171923;z-index:30;}
+    .kb-code-wrap{position:relative;list-style:none;margin:22px 0;}
+    .kb-copy-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);color:#e8eaf0;border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer;font-family:-apple-system,sans-serif;}
+    .kb-copy-btn:hover{background:rgba(255,255,255,.18);}
+    
+    </style></head><body>
+<div class="kb-article kb-style-bordered kb-btn-pill"><div class="kb-hero">
+        
+        <div class="kb-hero-title">Update Recruitment Assist and Browser</div>
+        <div class="kb-hero-subtitle">After a new version of Recruitment Assist is released, you will need to update both your Chrome browser and the extension to ensure everything works correctly. Follow these five steps in order.</div>
+        
+      </div><div class="kb-body">
+      
+      <div class="kb-toc"><div class="kb-toc-title">On this page</div><ol><li><a href="#7x6vhri">Update the Recruitment Assist Extension</a></li><li><a href="#rwcftci">Update Google Chrome</a></li><li><a href="#8aal8jr">Close All Job Board Tabs</a></li><li><a href="#d61rk14">Log Out and Log Back In to Recruitment Assist</a></li><li><a href="#bnlpd2f">Verify Recruitment Assist Profile Push</a></li></ol></div><ol class="kb-blocks"><li class="kb-callout" style="--callout-color:#5b6472;--callout-bg:rgba(91,100,114,.08);"><div class="kb-callout-label"><span class="kb-callout-icon">📝</span>Why is this important?</div><div>Job boards like Indeed, LinkedIn, Dice, Monster, and CareerBuilder update their websites periodically. When they do, we release a new version of Recruitment Assist to keep resume push working smoothly. Without updating, you may experience push failures or missing features.</div></li><li class="kb-step" id="7x6vhri"><div class="kb-step-num">1</div><div class="kb-step-body">
+          <div class="kb-step-title">Update the Recruitment Assist Extension</div><div class="kb-step-desc"><div><ul><li>In Chrome, type <a href="chrome://extensions">chrome://extensions</a> in the address bar and press Enter.</li><li>Enable Developer mode by turning ON the switch in the top-right corner.</li><li>Click the Update button displayed at the top of the Extensions page.</li><li>Wait a few seconds while Chrome updates all installed extensions.</li><li>Turn Developer mode OFF after the update is complete.</li></ul></div></div>
+        </div></li><li class="kb-callout" style="--callout-color:#1f9d63;--callout-bg:rgba(31,157,99,.08);"><div class="kb-callout-label"><span class="kb-callout-icon">💡</span>How to check your current version</div><div><ul><li>Right-click on the <strong>Recruitment Assist extension icon</strong> in your browser and select <strong>Manage Extension</strong>.</li><li>In the extension details page, check the <strong>Version</strong> number displayed in the <strong>Version</strong> section.</li><li>Compare the version number with the latest version shared by the <strong>CrintellTech Support team</strong> to confirm whether your extension is up to date.</li></ul></div></li><li class="kb-callout" style="--callout-color:#5b6472;--callout-bg:rgba(91,100,114,.08);"><div class="kb-callout-label"><span class="kb-callout-icon">📝</span>Note</div><div>If you do not manually update, Chrome will automatically update the extension within 6–8 hours. However, we recommend updating manually so you can start using the latest version right away.</div></li><li class="kb-step" id="rwcftci"><div class="kb-step-num">2</div><div class="kb-step-body">
+          <div class="kb-step-title">Update Google Chrome</div><div class="kb-step-desc"><div><ul><li>Open Google Chrome on your computer.</li><li>Click the three-dot menu (⋮) in the top-right corner of Chrome.</li><li>Navigate to Help → About Google Chrome.</li><li>Chrome will automatically check for available updates and install them.</li><li>Click Relaunch when prompted to complete the update.</li></ul></div></div>
+        </div></li><li class="kb-callout" style="--callout-color:#1f9d63;--callout-bg:rgba(31,157,99,.08);"><div class="kb-callout-label"><span class="kb-callout-icon">💡</span>Tip</div><div>We recommend always using the latest stable version.<div>For detailed instructions, visit <a href="https://support.google.com/chrome/answer/95414?hl=en&amp;co=GENIE.Platform%3DDesktop">Google's official guide on updating Chrome.</a></div></div></li><li class="kb-step" id="8aal8jr"><div class="kb-step-num">3</div><div class="kb-step-body">
+          <div class="kb-step-title">Close All Job Board Tabs</div><div class="kb-step-desc"><p class="isSelectedEnd">If you currently have any job board tabs open, such as <strong>Indeed, LinkedIn, Dice, Monster, or CareerBuilder</strong>, close those tabs completely.</p><p>This ensures that the updated Recruitment Assist extension loads properly when you reopen the job board portal. <strong>Refreshing the page alone is not sufficient</strong> — the tab must be fully closed and reopened.</p></div>
+        </div></li><li class="kb-step" id="d61rk14"><div class="kb-step-num">4</div><div class="kb-step-body">
+          <div class="kb-step-title">Log Out and Log Back In to Recruitment Assist</div><div class="kb-step-desc"><h3>Log Out</h3><ul><li>Click the <strong>Recruitment Assist</strong> icon in your Chrome toolbar.</li><li>Click <strong>Sign Out</strong>.</li></ul><p class="isSelectedEnd">Alternatively, you can sign out directly using the link:&nbsp;<a href="https://app.crintelltech.com/r/signout">Sign Out of Recruitment Assist</a></p><h3>Log Back In</h3><ul><li>Visit <a href="http://crintelltech.com/">CrintellTech</a> and click <strong>Login</strong> in the top-right corner.</li><li>Enter your official email ID and password.</li><li>If you have forgotten your password, click <strong>Forgot Password</strong> or contact <strong>CrintellTech Support</strong> at <a href="mailto:support@crintelltech.com">support@crintelltech.com</a>.</li></ul><h3>Verify You Are Logged In</h3><ul><li>Click the <strong>Recruitment Assist</strong> icon in your browser toolbar.</li><li>Confirm that your <strong>name</strong> is displayed. This indicates that you are successfully signed in.</li></ul></div>
+        </div></li><li class="kb-step" id="bnlpd2f"><div class="kb-step-num">5</div><div class="kb-step-body">
+          <div class="kb-step-title">Verify Recruitment Assist Profile Push</div><div class="kb-step-desc"><ul><li>Open your preferred job board (<strong>Indeed, LinkedIn, Dice, Monster, or CareerBuilder</strong>).</li><li>Navigate to a candidate profile that contains contact details, such as a <strong>phone number or email address</strong>.</li><li>Confirm that the <strong>Recruitment Assist popup appears</strong> and the profile push is completed successfully.</li><li>If a <strong>duplicate notification (black box)</strong> appears, it indicates that the candidate already exists in your ATS. This is expected behavior.</li></ul></div>
+        </div></li><li class="kb-accordion"><details class="kb-accordion-item"><summary>Our IT team restricts extension updates. What should we do?</summary><div class="kb-accordion-a">Ask your IT administrator to allow updates for the CrintellTech Recruitment Assist extension. The extension ID can be found at chrome://extensions. Your IT team can whitelist this extension for automatic updates.</div></details><details class="kb-accordion-item"><summary>I updated, but my name still does not appear on the daily report. Why?</summary><div class="kb-accordion-a">Your daily activity report tracks actions performed through the Recruitment Assist extension. If your name is missing from the report, it usually means one of the following:
+1. You are using a different browser than the one where Recruitment Assist is installed.
+2. You were not logged in to the extension when browsing the job board.
+3. The extension version is outdated.
+Complete all five steps above and try again. If the issue persists, contact support.</div></details><details class="kb-accordion-item"><summary>How often are updates released?</summary><div class="kb-accordion-a">Updates are released as needed when job boards change their website structure or when new features are added. You will typically be notified by your IT team or CrintellTech support when an update is available.</div></details></li><li class="kb-cta"><div class="kb-cta-inner">
+          
+          <div class="kb-cta-text">
+            <div class="kb-cta-title">Need More Help?</div>
+            <div class="kb-cta-desc">If none of these steps resolve your issue, contact our support with a brief description and screenshot of the problem or call 1-888-430-8232</div>
+          </div>
+          <a class="kb-cta-btn" href="mailto:support@crintelltech.com" target="_blank" rel="noopener">support@crintelltech.com</a>
+        </div></li></ol></div></div>
+<script>
+    document.querySelectorAll('[data-tabs]').forEach(function(container){
+      container.querySelectorAll('.kb-tab-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          container.querySelectorAll('.kb-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+          container.querySelectorAll('.kb-tab-panel').forEach(function(p){ p.style.display = 'none'; });
+          btn.classList.add('active');
+          var panel = container.querySelector('#' + CSS.escape(btn.dataset.tabTarget));
+          if(panel) panel.style.display = '';
+        });
+      });
+    });
+    document.querySelectorAll('[data-compare]').forEach(function(frame){
+      var before = frame.querySelector('.kb-compare-before');
+      var wrap = frame.querySelector('.kb-compare-before-wrap');
+      var slider = frame.querySelector('.kb-compare-slider');
+      if(!before || !wrap || !slider) return;
+      function update(){ var w = frame.offsetWidth; before.style.width = w + 'px'; wrap.style.width = slider.value + '%'; }
+      slider.addEventListener('input', update);
+      window.addEventListener('resize', update);
+      if(before.complete) update(); else before.addEventListener('load', update);
+    });
+    document.querySelectorAll('.kb-copy-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var codeEl = btn.parentElement.querySelector('.kb-code');
+        if(!codeEl) return;
+        navigator.clipboard.writeText(codeEl.textContent).then(function(){
+          var orig = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function(){ btn.textContent = orig; }, 1500);
+        });
+      });
+    });
+    </script>
+</body></html>
